@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+version = "1.0.0"
+def siteUrl = "https://github.com/LikeYong88/MagicaSakuraX"
+def gitUrl = "https://github.com/LikeYong88/MagicaSakuraX.git"
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName version
+    }
+    sourceSets{
+        main.res.srcDirs 'res', 'res-public'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    publish {
+        repoName = 'magicasakurax'
+        userOrg = 'jolky'
+        groupId = 'com.jolky.magicasakurax'
+        artifactId = 'magicasakurax'
+        publishVersion = version
+        desc = '基于MagicaSakura升级支持AndroidX'
+        website = siteUrl
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.google.android.material:material:${rootProject.ext.supportVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.constraintVersion}"
+
+}
